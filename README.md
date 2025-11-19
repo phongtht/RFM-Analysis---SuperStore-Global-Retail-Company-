@@ -3,9 +3,6 @@
 ---
 ![E-commerce Website_Analysis](https://github.com/Dorothy-Ho-Vy/Sample-Readme-template/blob/0e47d32968459ec80d7d2666fbf5044ac56894e6/1.png)
 
-Change Icon emoji 🔥🔍📘🚩 to your likings by clicking "Start" + "."
-
-
 # Applying the RFM model in Python to bulid customers segmentation and recommend appropriate marketing solutions.*
 
 **Author:** Tran Huu Tran Phong
@@ -119,48 +116,29 @@ This model could be very useful, especially for small and medium-sized enterpris
 
 Table 1: Products Table  
 
-👉🏻 Insert a screenshot of table schema. if table is too long, only show a snapshot of it. Recommend to put it in a toggle format
-
- _Example:_
-
 | Column Name | Data Type | Description |  
-|-------------|----------|-------------|  
-| Product_ID  | INT      | Unique identifier for each product |  
-| Name        | TEXT     | Product name |  
-| Category    | TEXT     | Product category |  
-| Price       | FLOAT    | Price per unit |  
-
-
+|-------------|-----------|-------------|  
+|StockCode	   | TEXT	   |The unique product code or item identifier.|
+|Description  |	TEXT	     |The short description of the product.|
+|Quantity	    | INT	      |The number of units of the product purchased in that transaction line item. Negative values indicate a return/cancellation.|
+|InvoiceDate  |	TEXT	     | The date and time when the transaction was generated. (Needs conversion to DATETIME for analysis).|
+|UnitPrice	   | FLOAT     |	The price per unit of the item in the local currency.|
+|CustomerID	  | FLOAT     |	The unique identifier for the customer. Null values indicate sales made to unregistered/guest customers.|
+|Country	     | TEXT	     |The name of the country where the customer resides or where the transaction occurred.|
 
 Table 2: Sales Transactions  
 
-👉🏻 Insert a screenshot of table schema. if table is too long, only show a snapshot of it. Recommend to put it in a toggle format
-
-
- _Example:_
-
 | Column Name    | Data Type | Description |  
-|---------------|----------|-------------|  
-| Transaction_ID | INT      | Unique identifier for each sale |  
-| Product_ID     | INT      | Foreign key linking to Products table |  
-| Quantity       | INT      | Number of items sold |  
-| Sale_Date      | DATE     | Date of transaction |  
-
-
-**_📌If the table is too big, only capture a part of it that contains key metrics you used in the projects or put the table in toggle_**
+|----------------|-----------|-------------|  
+| Segment        | TEXT      | The descriptive name of the customer group (e.g., Champions, Loyal, About To Sleep).|  
+| RFM Score      | TEXT      | A comma-separated list of 3-digit scores corresponding to that segment. The score is based on Recency, Frequency, and Monetary Value. |  
+ 
 
 <details>
-<summary>Click to toggle</summary>
-
-This content is hidden by default and will expand/collapse when clicked.
-
-You can add more details here, like code blocks, lists, or images.
+<summary>
+ 
+</summary>
 </details>
-
-#### 3️⃣ Data Relationships:  
-Describe the connections between tables—e.g., one-to-many, many-to-many.  
-
-👉🏻 Include a screenshot of Data Modeling to visualize relationships.  
 
 ---
 
