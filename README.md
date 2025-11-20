@@ -31,13 +31,19 @@
 SuperStore use RFM segmentation to efficiently categorize customers and design high-impact marketing campaigns for Christmas and New Year ?
 
 📘 Project Overview
+- To maximize the impact of marketing campaigns for the global retailer SuperStore, this project applied the RFM model (Recency, Frequency, Monetary value) to intelligently segment customers. By implementing this high-volume segmentation process in Python, we can accurately measure customer value, categorize the entire customer base, and deliver data-backed insights for highly targeted and efficient marketing recommendations.
 
+- Key Steps Included:
 
+ - Preparing the RFM dataset.
 
- This project analyzes sales trends and inventory control using SQL and Power BI. The objective is
-✔️ Identify high-demand products and sales trends.  
-✔️ Optimize inventory levels to prevent overstocking or stockouts.  
-✔️ Provide actionable insights through Power BI dashboards.  
+ - Calculating R, F, and M scores (using 31/12/2011 as the Recency reference date).
+
+ - Applying quintile scoring (1–5 scale) to define segment boundaries.
+
+ - Assigning segments and visualizing their distribution.
+
+ - Processing actionable insights and marketing recommendations.
 
 
 ### 👤 Who is this project for ?  
@@ -50,8 +56,6 @@ SuperStore use RFM segmentation to efficiently categorize customers and design h
 
 🚩 What ?
 - RFM (Recency, Frequency, Monetary) analysis is a proven marketing model for behavior-based customer segmentation. It groups customers based on their transaction history – how recently, how often, and how much they have purchased.
-
-
 
 🚩 Why RFM?
 
@@ -133,14 +137,92 @@ Table 2: Sales Transactions
 | Segment        | TEXT      | The descriptive name of the customer group (e.g., Champions, Loyal, About To Sleep).|  
 | RFM Score      | TEXT      | A comma-separated list of 3-digit scores corresponding to that segment. The score is based on Recency, Frequency, and Monetary Value. |  
  
-
-<details>
-<summary>
- 
-</summary>
-</details>
-
 ---
+
+## 3. 🔍 Exploratory Data Analysis (EDA)
+
+### 3.1. Understand Data
+
+#### a. Import Packages & Load Data Set
+```
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+!pip install squarify
+import squarify
+raw_data = pd.read_csv(path+'ecommerce_retail.csv')
+seg = pd.read_csv(path+'segmentation.csv')
+
+raw_data.head
+```
+|        | InvoiceNo | StockCode |                         Description | Quantity |         InvoiceDate | UnitPrice | CustomerID |        Country |
+|--------|-----------|-----------|-------------------------------------|----------|---------------------|-----------|------------|----------------|
+|    0   |    536365 |    85123A |  WHITE HANGING HEART T-LIGHT HOLDER |        6 | 2010-12-01 08:26:00 |      2.55 |    17850.0 | United Kingdom |
+|    1   |    536365 |     71053 |                 WHITE METAL LANTERN |        6 | 2010-12-01 08:26:00 |      3.39 |    17850.0 | United Kingdom |
+|    2   |    536365 |    84406B |      CREAM CUPID HEARTS COAT HANGER |        8 | 2010-12-01 08:26:00 |      2.75 |    17850.0 | United Kingdom |
+|    3   |    536365 |    84029G | KNITTED UNION FLAG HOT WATER BOTTLE |        6 | 2010-12-01 08:26:00 |      3.39 |    17850.0 | United Kingdom |
+|    4   |    536365 |    84029E |      RED WOOLLY HOTTIE WHITE HEART. |        6 | 2010-12-01 08:26:00 |      3.39 |    17850.0 | United Kingdom |
+
+#### b. Data Type & Data Value
+
+```
+print(df.info()) 
+print(df.describe())
+```
+*Information of thed data type of each column*
+| # | Column      | Non-Null Count  | Dtype          |
+|---|-------------|-----------------|----------------|
+| 0 | InvoiceNo   | 541909 non-null | object         |
+| 1 | StockCode   | 541909 non-null | object         |
+| 2 | Description | 540455 non-null | object         |
+| 3 | Quantity    | 541909 non-null | int64          |
+| 4 | InvoiceDate | 541909 non-null | datetime64[ns] |
+| 5 | UnitPrice   | 541909 non-null | float64        |
+| 6 | CustomerID  | 406829 non-null | float64        |
+| 7 | Country     | 541909 non-null | object         |
+
+*Describe the data value of the columns (min, max, count,...)*
+|       | Quantity      |  UnitPrice     | CustomerID    |
+|-------|---------------| ---------------|---------------|
+| count | 541909.000000 |  541909.000000 | 406829.000000 |
+| mean  | 9.552250      |  4.611114      | 15287.690570  |
+| min   | -80995.000000 |  -11062.060000 | 12346.000000  |
+| 25%   | 1.000000      |  1.250000      | 13953.000000  |
+| 50%   | 3.000000      |  2.080000      | 15152.000000  |
+| 75%   | 10.000000     |  4.130000      | 16791.000000  |
+| max   | 80995.000000  |  38970.000000  | 18287.000000  |
+| std   | 218.081158    |  96.759853     | 1713.600303   |
+
+#### Insights:
+
+After reviewing desription of the data value of numerical columns ( Quantity, UnitPrice, CustomerID), there are several data quality issues. These must be tackled before conducting deeper analysis or building models:
+
+- Negative values detected in 'Quantity' and 'UnitPrice'.
+- Missing values of 'Description' and 'CustomerID'.
+- Incorrect or inconsistent product descriptions in some orders.
+- Transactions with negative quantities that are not marked as cancellations.
+
+
+### 3.2. Hanlde missing values
+
+```
+raw_data.isnull().sum()
+```
+<img width="242" height="369" alt="ss" src="https://github.com/user-attachments/assets/dc08bfdc-5806-4040-b559-c71d0def9cf8" />
+
+```
+create_report(raw_data)
+```
+
+### 3.3.
+
+
+raw_data['transaction_date'] = pd.to_datetime(raw_data['InvoiceDate']).dt.date
+raw_data.head()
+
+
+
 
 ## 🧠 Design Thinking Process  
 
